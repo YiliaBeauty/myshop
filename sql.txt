@@ -1,0 +1,177 @@
+CREATE TABLE `user` (
+  `uid` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `addr` varchar(255) DEFAULT NULL,
+  `state` varchar(255) NOT NULL DEFAULT '1',
+  `code` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+INSERT INTO `user` VALUES ('1', 'hikitty', '123456', '张三', 'hikitty@qq.com', '13555512345', '上海市', '1', null);
+INSERT INTO `user` VALUES ('2', 'jack', '123456', '马云', 'jack@qq.com', '13812312312', '中国', '1', null);
+INSERT INTO `user` VALUES ('3', 'hellokitty', '123456', '张三', 'aodamao@qq.com', '13555512345', '上海市', '0', 'ca0f6f5a-36da-402d-8c0f-22587423de20');
+
+CREATE TABLE `adminuser` (
+  `auid` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `uid` int(11) NOT NULL,
+  PRIMARY KEY (`auid`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+INSERT INTO `adminuser` VALUES ('1', 'admin', 'admin', '0');
+
+create table `category`(
+	`cid` int(11) not null auto_increment,
+	`cname` varchar(255) default null,
+   PRIMARY KEY (`userid`)
+)ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+insert into `category` values ('1' , '婚礼服饰');
+insert into `category` values ('2' , '婚礼首饰');
+insert into `category` values ('3' , '婚礼用花');
+insert into `category` values ('4' , '婚礼配饰');
+insert into `category` values ('5' , '婚礼食品');
+insert into `category` values ('6' , '婚庆用品');
+insert into `category` values ('7' , '婚庆家纺');
+insert into `category` values ('8' , '传统婚礼');
+
+CREATE TABLE `categorysecond` (
+  `csid` int(11) NOT NULL AUTO_INCREMENT,
+  `csname` varchar(255) DEFAULT NULL,
+  `cid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`csid`),
+  KEY `FK936FCAF2418BCBAF` (`cid`),
+  CONSTRAINT `FK936FCAF2418BCBAF` FOREIGN KEY (`cid`) REFERENCES `category` (`cid`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+INSERT INTO `categorysecond` VALUES ('1', '中式新娘服', '1');
+INSERT INTO `categorysecond` VALUES ('2', '西式新娘服', '1');
+INSERT INTO `categorysecond` VALUES ('3', '中式新郎服', '1');
+INSERT INTO `categorysecond` VALUES ('4', '西式新郎服', '1');
+INSERT INTO `categorysecond` VALUES ('5', '项链', '2');
+INSERT INTO `categorysecond` VALUES ('6', '手表', '2');
+INSERT INTO `categorysecond` VALUES ('7', '戒指', '2');
+INSERT INTO `categorysecond` VALUES ('8', '耳环', '2');
+INSERT INTO `categorysecond` VALUES ('9', '手捧花', '3');
+INSERT INTO `categorysecond` VALUES ('10', '手腕花', '3');
+INSERT INTO `categorysecond` VALUES ('11', '胸花', '3');
+INSERT INTO `categorysecond` VALUES ('12', '花门', '3');
+INSERT INTO `categorysecond` VALUES ('13', '新娘头纱', '4');
+INSERT INTO `categorysecond` VALUES ('14', '新娘头饰', '4');
+INSERT INTO `categorysecond` VALUES ('15', '新郎领带', '4');
+INSERT INTO `categorysecond` VALUES ('16', '新郎袖口', '4');
+INSERT INTO `categorysecond` VALUES ('17', '婚礼蛋糕', '5');
+INSERT INTO `categorysecond` VALUES ('18', '婚宴酒水', '5');
+INSERT INTO `categorysecond` VALUES ('19', '喜糖', '5');
+INSERT INTO `categorysecond` VALUES ('20', '喜饼', '5');
+INSERT INTO `categorysecond` VALUES ('21', '请柬', '6');
+INSERT INTO `categorysecond` VALUES ('22', '喜糖盒', '6');
+INSERT INTO `categorysecond` VALUES ('23', '礼金簿册', '6');
+INSERT INTO `categorysecond` VALUES ('24', '婚礼纸巾', '6');
+INSERT INTO `categorysecond` VALUES ('25', '婚鞋', '7');
+INSERT INTO `categorysecond` VALUES ('26', '喜袜', '7');
+INSERT INTO `categorysecond` VALUES ('27', '情侣拖鞋', '7');
+INSERT INTO `categorysecond` VALUES ('28', '婚房窗帘', '7');
+INSERT INTO `categorysecond` VALUES ('29', '同心锁', '8');
+INSERT INTO `categorysecond` VALUES ('30', '红盖头', '8');
+INSERT INTO `categorysecond` VALUES ('31', '扇子', '8');
+INSERT INTO `categorysecond` VALUES ('32', '婚礼秤杆', '8');
+
+CREATE TABLE `product` (
+  `pid` int(11) NOT NULL AUTO_INCREMENT,
+  `pname` varchar(255) DEFAULT NULL,
+  `shop_price` double DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `pdesc` varchar(5000) DEFAULT NULL,
+  `is_hot` int(11) DEFAULT NULL,
+  `pdate` timestamp NULL DEFAULT NULL,
+  `csid` int(11) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  PRIMARY KEY (`pid`),
+  KEY `FKED8DCCEF5F778050` (`csid`),
+  CONSTRAINT `FKED8DCCEF5F778050` FOREIGN KEY (`csid`) REFERENCES `categorysecond` (`csid`)
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+INSERT INTO `product` VALUES ('34', '西式森系婚纱',  '1299', 'p01.jpg', '婚纱礼服新娘拖尾公主梦幻简约轻婚纱森系女', '1', '2018-01-27 21:27:48', '2', null);
+INSERT INTO `product` VALUES ('35', '新娘中式婚纱礼服', '999', 'p05.jpg', '2018新款秀禾服新娘中式婚纱礼服结婚敬酒服复古旗袍改良龙凤褂', '1', '2018-01-27 21:29:41',  '1', null);
+INSERT INTO `product` VALUES ('36', '雪花项链',  '699', 'p08.jpg', '结婚大王冠婚纱配饰', '0', '2018-01-27 21:30:46', '5', null);
+INSERT INTO `product` VALUES ('37', '手表','588', 'p11.jpg', '高档结婚礼品手表全自动机械表防水镂空', '0', '2018-01-27 21:31:21', '6', null);
+INSERT INTO `product` VALUES ('38', '雪花钻戒',  '1099', 'p12.jpg', '雪花款正品1克拉钻石戒指女式白18K求婚结婚钻戒', '0', '2018-01-27 21:32:01', '7', null);
+INSERT INTO `product` VALUES ('39', '装饰胸花', '36', 'p17.jpg', '结婚用品婚庆胸花新人伴娘胸花一套婚礼道具新郎新娘装饰胸花', '1', '2018-01-27 21:33:10', '11', null);
+INSERT INTO `product` VALUES ('40', '冰丝花门','699', 'p18.jpg', '新款2018婚庆道具路引婚礼路引花柱架子冰丝布套排花注水路引花门', '1', '2018-01-27 21:55:03', '13',  null);
+INSERT INTO `product` VALUES ('41', '头花饰品', '58', 'p20.jpg', '新娘头饰 红色婚纱敬酒服发饰头花饰品2018新款结婚中式配饰', '1', '2018-01-27 22:11:17', '15', null);
+INSERT INTO `product` VALUES ('42', '结婚钻戒','2699', 'p13.jpg', '925纯银1克拉钻戒仿真钻石戒指女一对结婚求婚情侣对戒', '0', '2018-01-27 22:15:37', '7', null);
+INSERT INTO `product` VALUES ('43', '新娘手捧花','39', 'p15.jpg', '创意婚庆新娘仿真花手工定制婚礼用品装饰道具手捧花浪漫婚礼'，'0','2018-01-27 22:21:58', '9', null);
+INSERT INTO `product` VALUES ('44', '新郎领带', '50', 'p21.jpg', '结婚领带男士正装韩版婚礼婚庆新郎伴郎宴会礼盒粉红紫', '1', '2018-02-04 16:29:23', '16', null);
+INSERT INTO `product` VALUES ('45', '新郎袖扣', '10', 'p22.jpg', '法式方形结婚婚庆新郎袖扣袖口袖钉 cufflinks I Love My Wife', '1', '2018-02-04 16:29:59', '17', null);
+INSERT INTO `product` VALUES ('46', '婚礼蛋糕', '980', 'p23.jpg', ' 粉色婚礼蛋糕', '1', '2018-02-04 16:31:26', '18', null);
+INSERT INTO `product` VALUES ('47', '婚宴酒水','69', 'p24.jpg', '婚宴定制酒（红礼盒雕刻瓶）酱香白酒高度纯粮食 1号基酒 500ml', '1', '2018-02-04 16:32:19', '19', null);
+INSERT INTO `product` VALUES ('48', '新娘头纱','79', 'p19.jpg', '欧式新娘蓬蓬头纱多层婚纱新款拍照结婚头纱简约短款韩式旅拍头纱', '0', '2018-02-04 16:34:10', '14',  null);
+INSERT INTO `product` VALUES ('49', '中式手捧花','38', 'p16.jpg', '新娘手捧花结婚新款粉红白仿真韩式婚礼花束', '0', '2018-02-04 16:36:13', '9', null);
+INSERT INTO `product` VALUES ('50', '经典款项链','189', 'p10.jpg', 'PANDORA潘多拉经典优雅项链气质锁骨链 386240CZ', '0', '2018-02-04 16:37:02', '5', null);
+INSERT INTO `product` VALUES ('51', '西式婚纱', '99', 'p02.jpg', '木南 原创正品 MUNAN 婚纱简约韩版抹胸齐地新娘结婚婚纱', '0', '2018-02-04 16:39:19', '2', null);
+INSERT INTO `product` VALUES ('52', '新郎马褂','368', 'p06.jpg', '新郎中式礼服男装结婚敬酒喜服唐装男士刺绣龙凤褂', '0', '2018-02-04 16:41:46', '3', null);
+INSERT INTO `product` VALUES ('53', '结婚对戒', '2419', 'p14.jpg', '男女婚戒对戒日韩开口戒钻戒', '0', '2018-02-04 16:46:58', '7', null);
+INSERT INTO `product` VALUES ('54', '中式新郎装','299', 'p07.jpg', '新郎中式婚礼服男装新郎中国风唐装', '0', '2018-02-04 16:48:09', '3', null);
+INSERT INTO `product` VALUES ('55', '女式婚礼项链', '199', 'p09.jpg', '新款 相约银饰 925银T-FCW1994 套链', '0', '2018-02-04 17:25:17', '5', null);
+
+CREATE TABLE `orders` (
+  `oid` int(11) NOT NULL AUTO_INCREMENT,
+  `money` double DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  `receiveInfo` varchar(255) DEFAULT NULL,
+  `phoNum` varchar(255) DEFAULT NULL,
+  `order_time` datetime DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `accepter` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`oid`),
+  KEY `FKC3DF62E5FC32F8E` (`uid`),
+  CONSTRAINT `FKC3DF62E5FC32F8E` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+INSERT INTO `orders` VALUES ('1', '2685', '0', null, null, '2018-03-18 21:10:00', '3', null);
+INSERT INTO `orders` VALUES ('2', '2685', '1', '上海市静安区', '13913812312', '2018-03-18 21:12:16', '3', '嗷大猫');
+INSERT INTO `orders` VALUES ('3', '12952', '0', null, null, '2018-03-04 17:37:01', '1', null);
+
+CREATE TABLE `billitem` (
+  `billid` int(11) NOT NULL AUTO_INCREMENT,
+  `count` int(11) DEFAULT NULL,
+  `ptotal` double DEFAULT NULL,
+  `pid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`billid`),
+  UNIQUE KEY `pid` (`pid`),
+  KEY `FK3510439A73B4E627` (`pid`),
+  CONSTRAINT `FK3510439A73B4E627` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `orderitem` (
+  `oiid` int(11) NOT NULL AUTO_INCREMENT,
+  `count` int(11) DEFAULT NULL,
+  `subtotal` double DEFAULT NULL,
+  `pid` int(11) DEFAULT NULL,
+  `oid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`oiid`),
+  KEY `FKE8B2AB61E818A405` (`oid`),
+  KEY `FKE8B2AB6173B4E627` (`pid`),
+  CONSTRAINT `FKE8B2AB6173B4E627` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`),
+  CONSTRAINT `FKE8B2AB61E818A405` FOREIGN KEY (`oid`) REFERENCES `orders` (`oid`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+INSERT INTO `orderitem` VALUES ('1', '1', '699', '36', '2');
+INSERT INTO `orderitem` VALUES ('2', '1', '588', '37', '2');
+INSERT INTO `orderitem` VALUES ('3', '1', '699', '42', '2');
+INSERT INTO `orderitem` VALUES ('4', '1', '699', '40', '2');
+INSERT INTO `orderitem` VALUES ('5', '1', '4899', '54', '3');
+INSERT INTO `orderitem` VALUES ('6', '1', '7999', '55', '3');
+INSERT INTO `orderitem` VALUES ('7', '1', '45', '45', '3');
+INSERT INTO `orderitem` VALUES ('8', '1', '9', '46', '3');
+
+CREATE TABLE `shopcartitem` (
+  `cartitemid` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `pid` int(11) DEFAULT NULL,
+  `pcount` int(11) DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `ptotal` double DEFAULT NULL,
+  `pname` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`cartitemid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
